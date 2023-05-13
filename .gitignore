@@ -1,0 +1,9 @@
+build/
+dist/
+experiments/
+generated_files/
+*.egg-info
+*.out
+*.sh
+__pycache__
+*.pyc

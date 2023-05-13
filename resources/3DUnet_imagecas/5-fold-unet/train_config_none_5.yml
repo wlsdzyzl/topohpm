@@ -1,0 +1,144 @@
+model:
+  name: UNet3D
+  in_channels: 1
+  # number of output channels
+  out_channels: 1
+  # determines the order of operators in a single layer (crg - Conv3d+ReLU+GroupNorm)
+  layer_order: gcr
+  # initial number of feature maps
+  f_maps: 32
+  # number of f_map levels
+  num_levels: 3
+  # number of groups in the groupnorm
+  num_groups: 8
+  # apply element-wise nn.Sigmoid after the final 1x1x1 convolution, otherwise apply nn.Softmax
+  final_sigmoid: true
+  is_segmentation: true
+regularizer:
+  name: none
+trainer:
+  checkpoint_dir: /home/*****/project/toposeg/experiments/3d_imagecas/UNET/FOLD5
+  resume: null
+  pre_trained: null
+  validate_after_iters: 80
+  log_after_iters: 40
+  max_num_epochs: 25
+  max_num_iterations: 15000000
+  eval_score_higher_is_better: True
+optimizer:
+  # initial learning rate
+  learning_rate: 0.01
+  # weight decay
+  weight_decay: 0.00001
+loss:
+  name: BCEDiceLoss
+  # a target value that is ignored and does not contribute to the input gradient
+  ignore_index: null
+  # skip the last channel in the target (i.e. when last channel contains data not relevant for the loss)
+  skip_last_target: false
+eval_metric:
+  name: MeanIoU
+  threshold: 0.5
+lr_scheduler:
+  name: ReduceLROnPlateau
+  mode: max
+  factor: 0.5
+  patience: 30
+
+# Configure training and validation loaders
+loaders:
+  dataset: StandardNIIDataset
+  # how many subprocesses to use for data loading
+  num_workers: 8
+  # path to the raw data within the H5
+  raw_dir: raw
+  # path to the the label data withtin the H5
+  label_dir: label
+  # configuration of the train loader
+  # skeleton_dir: skeleton
+  truncation: [-400, 400]
+  train:
+    # path to the training datasets
+    file_paths:
+      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold1
+      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold2
+      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold3
+      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold4    
+    # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
+    slice_builder:
+      name: FilterSliceBuilder
+      # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
+      patch_shape: [72, 128, 128]
+      # stride between patches
+      stride_shape: [48, 96, 96]
+      # minimum volume of the labels in the patch
+      threshold: 0.0
+      # probability of accepting patches which do not fulfil the threshold criterion
+      slack_acceptance: 0.01
+    
+    transformer:
+      raw:
+        - name: Standardize
+        # - name: RandomFlip
+        # - name: RandomRotate90
+        # - name: RandomRotate
+        #   # rotate only in ZY plane due to anisotropy
+        #   axes: [[2, 1]]
+        #   angle_spectrum: 45
+        #   mode: reflect
+        # - name: ElasticDeformation
+        #   spline_order: 3
+        # - name: GaussianBlur3D
+        #   execution_probability: 0.5
+        # - name: AdditiveGaussianNoise
+        #   execution_probability: 0.2
+        # - name: AdditivePoissonNoise
+        #   execution_probability: 0.2
+        - name: ToTensor
+          expand_dims: true
+      label:
+        # - name: RandomFlip
+        # - name: RandomRotate90
+        # - name: RandomRotate
+        #   # rotate only in ZY plane due to anisotropy
+        #   axes: [[2, 1]]
+        #   angle_spectrum: 45
+        #   mode: reflect
+        # - name: ElasticDeformation
+        #   spline_order: 0
+        - name: BlobsToMask
+          append_label: false
+          boundary: false
+        - name: ToTensor
+          expand_dims: false
+
+  # configuration of the val loader
+  val:
+    # path to the val datasets
+    file_paths:
+      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold5
+
+    # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
+    slice_builder:
+      name: FilterSliceBuilder
+      # val patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
+      patch_shape: [72, 128, 128]
+      # val stride between patches
+      stride_shape: [48, 96, 96]
+      # minimum volume of the labels in the patch
+      threshold: 0
+      # probability of accepting patches which do not fulfil the threshold criterion
+      slack_acceptance: 0.01
+
+    # data augmentation
+    transformer:
+      raw:
+        - name: Standardize
+        - name: ToTensor
+          expand_dims: true
+      label:
+        - name: BlobsToMask
+          append_label: false
+          boundary: false
+        - name: ToTensor
+          expand_dims: false

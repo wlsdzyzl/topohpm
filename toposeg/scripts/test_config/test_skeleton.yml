@@ -1,0 +1,133 @@
+# Trained on data from the 2018 Kaggle Data Science Bowl: https://www.kaggle.com/c/data-science-bowl-2018/data
+model:
+  name: UNet2D
+  in_channels: 1
+  out_channels: 1
+  # use Groupnorm instead of Batchnorm for DSB; Batchnorm introduces artifacts around nuclei due to the difference
+  # in intensity distribution between images with large and small cells
+  layer_order: gcr
+  num_groups: 8
+  f_maps: [32, 64, 128]
+  final_sigmoid: true
+  is_segmentation: true
+regularizer:
+  name: SkeletonLoss
+  filter_p: 0.6
+  loss: MSELoss
+  reduction: mean
+trainer:
+  checkpoint_dir: Skeleton
+  resume: null
+  pre_trained: /home/*****/project/toposeg/experiments/2d_cremi_A/UNET/FOLD1/best_checkpoint.pytorch
+  validate_after_iters: 5000
+  log_after_iters: 1000
+  max_num_epochs: 100
+  max_num_iterations: 100
+  eval_score_higher_is_better: True
+  lambda_reg: 0.5
+  start_epoch_regularize: 0
+  
+optimizer:
+  # initial learning rate
+  learning_rate: 0.01
+  # weight decay
+  weight_decay: 0.00001
+loss:
+  name: BCEDiceLoss
+  # a target value that is ignored and does not contribute to the input gradient
+  ignore_index: null
+  # skip the last channel in the target (i.e. when last channel contains data not relevant for the loss)
+  skip_last_target: false
+eval_metric:
+  name: MeanIoU
+  threshold: 0.5
+lr_scheduler:
+  name: ReduceLROnPlateau
+  mode: max
+  factor: 0.2
+  patience: 30
+loaders:
+  dataset: IMGDataset
+  batch_size: 1
+  num_workers: 8
+  raw_dir: raw
+  label_dir: label
+  train:
+    file_paths:
+      - /media/*****/DATA/datasets/CREMI/dataset_A/fold2
+      - /media/*****/DATA/datasets/CREMI/dataset_A/fold3
+      - /media/*****/DATA/datasets/CREMI/dataset_A/fold4
+      - /media/*****/DATA/datasets/CREMI/dataset_A/fold5
+    slice_builder:
+      name: FilterSliceBuilder
+      # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
+      patch_shape: [1, 256, 256]
+      # train stride between patches
+      stride_shape: [1, 128, 128]
+      # minimum volume of the labels in the patch
+      threshold: 0
+      # probability of accepting patches which do not fulfil the threshold criterion
+      slack_acceptance: 0.01
+    transformer:
+      raw:
+        - name: Standardize
+        - name: RandomFlip
+        - name: RandomRotate90
+        - name: RandomRotate
+          axes: [[2, 1]]
+          angle_spectrum: 45
+          mode: reflect
+        - name: GaussianBlur3D
+          execution_probability: 0.5
+        - name: AdditiveGaussianNoise
+          execution_probability: 0.2
+        - name: AdditivePoissonNoise
+          execution_probability: 0.2
+        - name: ToTensor
+          expand_dims: true
+      label:
+        - name: RandomFlip
+        - name: RandomRotate90
+        - name: RandomRotate
+          axes: [[2, 1]]
+          angle_spectrum: 45
+          mode: reflect
+        - name: BlobsToMask
+        - name: ToTensor
+          expand_dims: true
+      weight:
+        - name: RandomFlip
+        - name: RandomRotate90
+        - name: RandomRotate
+          axes: [[2, 1]]
+          angle_spectrum: 45
+          mode: reflect
+        - name: BlobsToMask
+        - name: ToTensor
+          expand_dims: true
+  val:
+    file_paths:
+      - /media/*****/DATA/datasets/CREMI/dataset_A/fold1
+    slice_builder:
+      name: FilterSliceBuilder
+      # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
+      patch_shape: [1, 256, 256]
+      # train stride between patches
+      stride_shape: [1, 256, 256]
+      # minimum volume of the labels in the patch
+      threshold: 0
+      # probability of accepting patches which do not fulfil the threshold criterion
+      slack_acceptance: 0.01
+    transformer:
+      raw:
+        - name: Standardize
+        - name: ToTensor
+          expand_dims: true
+      label:
+        - name: BlobsToMask
+        - name: ToTensor
+          expand_dims: true
+      weight:
+        - name: BlobsToMask
+        - name: ToTensor
+          expand_dims: true
