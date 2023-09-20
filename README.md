@@ -1,4 +1,4 @@
-## TopoHPM: Topology-Preserving Hard Pixel Mining for Tubular Structure Segmentation
+## Topology-Preserving Hard Pixel Mining for Tubular Structure Segmentation
 This is the official pytorch implementation of Paper "Topology-Preserving Hard Pixel Mining for Tubular Structure Segmentation", BMVC 2023.
 
 ![](./images/comp.png)
@@ -36,3 +36,8 @@ nohup ./predict.sh &
 ```
 ### Evaluation
 We compute *Dice coefficient* and *meanIoU* to evaluate the volumetric accuracy, *Variation of Information (VOI)* and *Adapted Rand Error (ARE)* for clustering-based metrics, *Betti-0* and *Betti-1* error as topology measurements, respectively. Evaluation on 2D image and 3D image can be done through `topohpm/scripts/evaluate.py` and `topohpm/scripts/evaluate3d.py`, respectively.
+### BibTeX
+```
+```
+### Acknowledgements
+The code structure is mainly inherited from [pytorch-3dunet](https://github.com/wolny/pytorch-3dunet).
