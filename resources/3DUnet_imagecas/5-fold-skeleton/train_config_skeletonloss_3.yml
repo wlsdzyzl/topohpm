@@ -21,9 +21,9 @@ regularizer:
   loss: MSELoss
   reduction: mean
 trainer:
-  checkpoint_dir: /home/*****/project/toposeg/experiments/3d_imagecas/SKELETON_LOSS_0.6_0.5/FOLD3
+  checkpoint_dir: /home/wlsdzyzl/project/topohpm/experiments/3d_imagecas/SKELETON_LOSS_0.6_0.5/FOLD3
   resume: null
-  pre_trained: /home/*****/project/toposeg/experiments/3d_imagecas/UNET/FOLD3/best_checkpoint.pytorch
+  pre_trained: /home/wlsdzyzl/project/topohpm/experiments/3d_imagecas/UNET/FOLD3/best_checkpoint.pytorch
   validate_after_iters: 80
   log_after_iters: 40
   max_num_epochs: 50
@@ -66,10 +66,10 @@ loaders:
   train:
     # path to the training datasets
     file_paths:
-      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold1
-      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold2
-      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold4
-      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold5    
+      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold1
+      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold2
+      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold4
+      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold5    
     # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:
       name: FilterSliceBuilder
@@ -122,7 +122,7 @@ loaders:
   val:
     # path to the val datasets
     file_paths:
-      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold3
+      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold3
 
     # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:

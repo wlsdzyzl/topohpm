@@ -13,7 +13,7 @@ model:
 regularizer:
   name: none
 trainer:
-  checkpoint_dir: /home/*****/project/toposeg/experiments/2d_cremi_B/UNET_CLDICE_GAMMA1.0/FOLD1/
+  checkpoint_dir: /home/wlsdzyzl/project/topohpm/experiments/2d_cremi_B/UNET_CLDICE_GAMMA1.0/FOLD1/
   resume: null
   pre_trained: null
   validate_after_iters: 5000
@@ -54,10 +54,10 @@ loaders:
   label_dir: label
   train:
     file_paths:
-      - /media/*****/DATA/datasets/CREMI/dataset_B/fold2
-      - /media/*****/DATA/datasets/CREMI/dataset_B/fold3
-      - /media/*****/DATA/datasets/CREMI/dataset_B/fold4
-      - /media/*****/DATA/datasets/CREMI/dataset_B/fold5
+      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold2
+      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold3
+      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold4
+      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold5
     slice_builder:
       name: FilterSliceBuilder
       # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
@@ -108,7 +108,7 @@ loaders:
           expand_dims: true
   val:
     file_paths:
-      - /media/*****/DATA/datasets/CREMI/dataset_B/fold1
+      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold1
     slice_builder:
       name: FilterSliceBuilder
       # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)

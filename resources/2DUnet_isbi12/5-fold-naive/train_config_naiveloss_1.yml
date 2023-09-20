@@ -17,7 +17,7 @@ regularizer:
   loss: MSELoss
   reduction: mean
 trainer:
-  checkpoint_dir: /home/*****/project/toposeg/experiments/2d_isbi12/NAIVE_LOSS_0.6_0.5/FOLD1
+  checkpoint_dir: /home/wlsdzyzl/project/topohpm/experiments/2d_isbi12/NAIVE_LOSS_0.6_0.5/FOLD1
   resume: null
   pre_trained: null
   validate_after_iters: 216
@@ -55,10 +55,10 @@ loaders:
   label_dir: label
   train:
     file_paths:
-      - /media/*****/DATA/datasets/ISBI12/fold2
-      - /media/*****/DATA/datasets/ISBI12/fold3
-      - /media/*****/DATA/datasets/ISBI12/fold4
-      - /media/*****/DATA/datasets/ISBI12/fold5
+      - /media/wlsdzyzl/DATA/datasets/ISBI12/fold2
+      - /media/wlsdzyzl/DATA/datasets/ISBI12/fold3
+      - /media/wlsdzyzl/DATA/datasets/ISBI12/fold4
+      - /media/wlsdzyzl/DATA/datasets/ISBI12/fold5
     slice_builder:
       name: FilterSliceBuilder
       # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
@@ -108,7 +108,7 @@ loaders:
           expand_dims: true
   val:
     file_paths:
-      - /media/*****/DATA/datasets/ISBI12/fold1
+      - /media/wlsdzyzl/DATA/datasets/ISBI12/fold1
     slice_builder:
       name: FilterSliceBuilder
       # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)

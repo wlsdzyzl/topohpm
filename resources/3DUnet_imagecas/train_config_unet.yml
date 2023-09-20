@@ -72,7 +72,7 @@ trainer:
   # model with lower eval score is considered better
   eval_score_higher_is_better: true
   # path to the checkpoint directory
-  checkpoint_dir: /home/*****/project/toposeg/experiments/3d_imagecas/UNET
+  checkpoint_dir: /home/wlsdzyzl/project/topohpm/experiments/3d_imagecas/UNET
   # path to latest checkpoint; if provided the training will be resumed from that checkpoint
   resume: null
   # path to the best_checkpoint.pytorch; to be used for fine-tuning the model with additional ground truth
@@ -105,10 +105,10 @@ loaders:
   train:
     # path to the training datasets
     file_paths:
-      - /media/*****/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold2
-      - /media/*****/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold3
-      - /media/*****/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold4
-      - /media/*****/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold5    # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
+      - /media/wlsdzyzl/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold2
+      - /media/wlsdzyzl/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold3
+      - /media/wlsdzyzl/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold4
+      - /media/wlsdzyzl/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold5    # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:
       name: FilterSliceBuilder
       # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
@@ -160,7 +160,7 @@ loaders:
   val:
     # path to the val datasets
     file_paths:
-      - /media/*****/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold1
+      - /media/wlsdzyzl/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold1
 
     # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:

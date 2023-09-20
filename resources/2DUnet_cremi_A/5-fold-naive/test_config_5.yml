@@ -1,4 +1,4 @@
-model_path: /home/*****/project/toposeg/experiments/2d_cremi_A/NAIVE_LOSS_0.6_0.5/FOLD5/last_checkpoint.pytorch
+model_path: /home/wlsdzyzl/project/topohpm/experiments/2d_cremi_A/NAIVE_LOSS_0.6_0.5/FOLD5/last_checkpoint.pytorch
 model:
   name: UNet2D
   in_channels: 1
@@ -17,8 +17,8 @@ loaders:
   # dataset class
   dataset: IMGDataset
   # save predictions to output_dir
-  output_dir: /home/*****/project/toposeg/generated_files/predictions/2d_cremi_A/NAIVE_LOSS_0.6_0.5/prob
-  output_seg_dir: /home/*****/project/toposeg/generated_files/predictions/2d_cremi_A/NAIVE_LOSS_0.6_0.5/seg
+  output_dir: /home/wlsdzyzl/project/topohpm/generated_files/predictions/2d_cremi_A/NAIVE_LOSS_0.6_0.5/prob
+  output_seg_dir: /home/wlsdzyzl/project/topohpm/generated_files/predictions/2d_cremi_A/NAIVE_LOSS_0.6_0.5/seg
   threshold: 0.4
   # batch dimension; if number of GPUs is N > 1, then a batch_size of N * batch_size will automatically be taken for DataParallel
   batch_size: 1
@@ -31,7 +31,7 @@ loaders:
   label_dir: label
   test:
     file_paths:
-      - /media/*****/DATA/datasets/CREMI/dataset_A/fold5
+      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_A/fold5
     # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:
       # SliceBuilder class

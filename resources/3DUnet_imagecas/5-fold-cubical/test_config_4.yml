@@ -1,4 +1,4 @@
-model_path: /home/*****/project/toposeg/experiments/3d_imagecas/CUBICAL_LOSS_0.6_0.5/FOLD4/last_checkpoint.pytorch
+model_path: /home/wlsdzyzl/project/topohpm/experiments/3d_imagecas/CUBICAL_LOSS_0.6_0.5/FOLD4/last_checkpoint.pytorch
 # model configuration
 model:
   # model class
@@ -38,12 +38,12 @@ loaders:
   # how many subprocesses to use for data loading
   num_workers: 8
   # test loaders configuration
-  output_dir: /home/*****/project/toposeg/generated_files/predictions/3d_imagecas/CUBICAL_LOSS_0.6_0.5
+  output_dir: /home/wlsdzyzl/project/topohpm/generated_files/predictions/3d_imagecas/CUBICAL_LOSS_0.6_0.5
   test:
     # paths to the test datasets; if a given path is a directory all NII files
     # inside this this directory will be included as well (non-recursively)
     file_paths:
-      - /media/*****/DATA/datasets/imageCAS/zoomed_72_128_128/fold4
+      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold4
 
     # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:
