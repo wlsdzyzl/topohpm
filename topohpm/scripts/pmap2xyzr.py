@@ -3,7 +3,7 @@ import numpy as np
 import sys, getopt
 import os
 import glob
-    import shutil
+import shutil
 from scipy.ndimage import measurements as mea
 from skimage.morphology import remove_small_objects, binary_erosion, skeletonize as skeletonize
 from scipy.spatial import cKDTree

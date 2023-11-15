@@ -1,7 +1,7 @@
 # this file is used to compute prediction error.
 # Betti number error (0, 1)
 # adapted rand index
-# dice coefficient
+# dice coefficientmIoU
 # accuracy
 # Variation of Information(VOI)
 # Street Mover distance

@@ -4,6 +4,7 @@ experiments/
 generated_files/
 *.egg-info
 *.out
-*.sh
+# *.sh
 __pycache__
 *.pyc
+*.ply

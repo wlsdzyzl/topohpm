@@ -9,7 +9,7 @@ def main(argv):
     label_dir = ''
     output_dir = './'
     n = 100
-    opts, args = getopt.getopt(argv, "hr:l:o:k:", ['help', 'raw_dir', 'label_dir', 'output_dir', 'num'])
+    opts, args = getopt.getopt(argv, "hr:l:o:n:", ['help', 'raw_dir', 'label_dir', 'output_dir', 'num'])
     if len(opts) == 0:
         print('unknow options, usage: batch_process.py -r <raw_dir> -l <label_dir> -o <output_dir=./> -n <num=100>')
         sys.exit()
@@ -57,7 +57,7 @@ def main(argv):
     os.makedirs(fold_raw_dir)
     os.makedirs(fold_label_dir)
 
-    print(f'creating {i+1}-th fold ...') 
+    print(f'creating fold ...') 
     for raw_image_path, label_image_path in data:
         print(f'copy {raw_image_path} to {fold_raw_dir} and {label_image_path} to {fold_label_dir}'  ) 
         shutil.copy(raw_image_path, os.path.join(fold_raw_dir, os.path.basename(raw_image_path)))

@@ -94,29 +94,29 @@ class CubicalBettiError:
             current_input_patch = input[pid[0]:pid[0] + self.size[0], pid[1]:pid[1] + self.size[1]]
             current_target_patch = target[pid[0]:pid[0] + self.size[0], pid[1]:pid[1] + self.size[1]]
 
-            input_vector = np.asarray(1 - input).flatten()
+            input_vector = np.asarray(1 - current_input_patch).flatten()
             if dimension == 2:
                 input_cubic = gd.CubicalComplex(
-                    dimensions=[input.shape[0], input.shape[1]],
+                    dimensions=[current_input_patch.shape[0], current_input_patch.shape[1]],
                     top_dimensional_cells=input_vector
                 )
             elif dimension == 3:
                 input_cubic = gd.CubicalComplex(
-                    dimensions=[input.shape[0], input.shape[1], input.shape[2]],
+                    dimensions=[current_input_patch.shape[0], current_input_patch.shape[1], current_input_patch.shape[2]],
                     top_dimensional_cells=input_vector
                 )   
             input_cubic.persistence(homology_coeff_field=2, min_persistence=0)
             pairs_input = input_cubic.cofaces_of_persistence_pairs()
 
-            target_vector = np.asarray(1 - target).flatten()
+            target_vector = np.asarray(1 - current_target_patch).flatten()
             if dimension == 2:
                 target_cubic = gd.CubicalComplex(
-                    dimensions=[target.shape[0], target.shape[1]],
+                    dimensions=[current_target_patch.shape[0], current_target_patch.shape[1]],
                     top_dimensional_cells=target_vector
                 )
             elif dimension == 3:
                 target_cubic = gd.CubicalComplex(
-                    dimensions=[target.shape[0], target.shape[1], target.shape[2]],
+                    dimensions=[current_target_patch.shape[0], current_target_patch.shape[1], current_target_patch.shape[2]],
                     top_dimensional_cells=target_vector
                 )   
             target_cubic.persistence(homology_coeff_field=2, min_persistence=0)
