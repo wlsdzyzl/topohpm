@@ -35,7 +35,7 @@ Similar to the training process, we need to specify a config file for prediction
 nohup ./predict.sh &
 ```
 ### Evaluation
-We compute *Dice coefficient* and *meanIoU* to evaluate the volumetric accuracy, *Variation of Information (VOI)* and *Adapted Rand Error (ARE)* for clustering-based metrics, *Betti-0* and *Betti-1* error as topology measurements, respectively. Evaluation on 2D image and 3D image can be done through `topohpm/scripts/evaluate.py` and `topohpm/scripts/evaluate3d.py`, respectively.
+We compute *Dice coefficient* and *MeanIoU* to evaluate the volumetric accuracy, *Variation of Information (VOI)* and *Adapted Rand Error (ARE)* for clustering-based metrics, *Betti-0* and *Betti-1* error as topology measurements, respectively. Evaluation on 2D image and 3D image can be done through `topohpm/scripts/evaluate.py` and `topohpm/scripts/evaluate3d.py`, respectively.
 ### BibTeX
 ```
 ```

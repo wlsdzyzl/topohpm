@@ -15,6 +15,22 @@ from skimage.morphology import skeletonize
 from topohpm.scripts.utils import get_coordinates
 from geomloss import SamplesLoss
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+
+class MeanIoU:
+    def __init__(self, threshold = 0.5, **kwargs):
+        self.threshold = threshold
+    def __call__(self, input, target):
+        input = (input > self.threshold).astype(float)
+        target = (target > self.threshold).astype(float)
+        return (input * target).sum() / (input.sum() + target.sum() - (input * target).sum())
+class Dice:
+    def __init__(self, threshold = 0.5, **kwargs):
+        self.threshold = threshold
+    def __call__(self, input, target):
+        input = (input > self.threshold).astype(float)
+        target = (target > self.threshold).astype(float)
+        return 2 * (input * target).sum() / (input.sum() + target.sum()) 
+    
 class LevelSetBettiError:
     def __init__(self, size, threshold = 0.5, maxdim = 1, area_threshold = 64, rand_patch_number = 10, min_size = 100,  **kwargs):
         self.threshold = threshold
