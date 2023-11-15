@@ -6,8 +6,8 @@
 # Variation of Information(VOI)
 # Street Mover distance
 
-from topohpm.unet3d.metrics import MeanIoU, DiceCoefficient
-from topohpm.regularized_unet3d.metrics import LevelSetBettiError, CubicalBettiError, Accuracy, VariationOfInformation, AdaptedRandError, AdjustedRandIndex, ConnectedComponentError, CLDice, StreetMoverDistance
+# from topohpm.unet3d.metrics import MeanIoU, DiceCoefficient
+from topohpm.regularized_unet3d.np_metrics import LevelSetBettiError, CubicalBettiError, Accuracy, VariationOfInformation, AdaptedRandError, AdjustedRandIndex, ConnectedComponentError, CLDice, StreetMoverDistance
 import torch, numpy as np
 import torch.nn as nn
 from collections.abc import Iterable
@@ -39,18 +39,6 @@ def f(pred_path, label_path, eval_criterions_pixel, eval_criterions_cluster, zoo
     # print(label.shape, np.max(label), np.min(label))
     label[ label >= 0.5 ] = 1.0
     label[ label < 0.5 ] = 0.0
-
-    # indices = np.where(label == 1.0)
-    # print(indices)
-    # # print(locations)
-    # print("fuck---------------------------")
-
-    # indices = np.where(pred == 1.0)
-    # print(indices)
-
-
-    # print(label[pred > 0.5], pred[pred > 0.5])
-    # print(np.sum(np.logical_and(label > 0.5, pred > 0.5)))
     # remove noisy and disconnected parts
     pred = remove_small_objects(pred > prob_threshold, min_size = area_threshold, connectivity = 3).astype(float)
     label = remove_small_objects(label > prob_threshold, min_size = area_threshold, connectivity = 3).astype(float)

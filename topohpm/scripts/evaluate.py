@@ -6,8 +6,7 @@
 # Variation of Information(VOI)
 # Street Mover distance
 
-from topohpm.unet3d.metrics import MeanIoU, DiceCoefficient
-from topohpm.regularized_unet3d.metrics import LevelSetBettiError, CubicalBettiError, Accuracy, VariationOfInformation, AdaptedRandError, AdjustedRandIndex, ConnectedComponentError, CLDice, StreetMoverDistance
+from topohpm.regularized_unet3d.np_metrics import LevelSetBettiError, CubicalBettiError, Accuracy, VariationOfInformation, AdaptedRandError, AdjustedRandIndex, ConnectedComponentError, CLDice, StreetMoverDistance
 from skimage import metrics
 import torch, numpy as np
 import torch.nn as nn
@@ -51,7 +50,6 @@ def f(pred_path, label_path, eval_criterions_pixel, eval_criterions_cluster, zoo
         tmp = eval_c(pred, label)
         if torch.is_tensor(tmp):
             tmp = tmp.item()
-        # print(tmp)
         if isinstance(tmp, Iterable):
             res = res + list(tmp)
         else:
@@ -64,7 +62,6 @@ def f(pred_path, label_path, eval_criterions_pixel, eval_criterions_cluster, zoo
         tmp = eval_c(input_label, target_label, False)
         if torch.is_tensor(tmp):
             tmp = tmp.item()
-        # print(tmp)
         if isinstance(tmp, Iterable):
             res = res + list(tmp)
         else:
@@ -75,16 +72,16 @@ def main(argv):
     gt_path = ''
     threshold = 0.5
     opts, args = getopt.getopt(argv, "hp:g:t:s:z:a:m:", ['help', 'pred=', 'gt=', 'threshold=', 'size=', 'zoom=', 'area=', 'minsize='])
-    size = (100, 100)
+
     area = 10
     min_size = 100
     zoom_size = None
     if len(opts) == 0:
-        print('unknow options, usage: evaluate.py -p <pred_file> -g <gt_file> -t <threshold = 0.5> -s <size = 100,100> -z <zoom = None> -a <area = 10> -m <minsize = 100>')
+        print('unknow options, usage: evaluate.py -p <pred_file> -g <gt_file> -t <threshold = 0.5> -z <zoom = None> -a <area = 10> -m <minsize = 100>')
         sys.exit()
     for opt, arg in opts:
         if opt in ('-h', '--help'):
-            print('usage: evaluate.py -p <pred_file> -g <gt_file> -t <threshold = 0.5> -s <size = 100,100> -z <zoom = None> -a <area = 10> -m <minsize = 100>')
+            print('usage: evaluate.py -p <pred_file> -g <gt_file> -t <threshold = 0.5> -z <zoom = None> -a <area = 10> -m <minsize = 100>')
             sys.exit()
         elif opt in ("-p", '--pred'):
             pred_path = arg
@@ -101,21 +98,17 @@ def main(argv):
         elif opt in ('-m', '--minsize'):
             min_size = int(arg)
         else:
-            print('unknow option,usage: evaluate.py -p <pred_file> -g <gt_file> -t <threshold = 0.5>, -s <size = 100,100> -z <zoom = None> -a <area = 10> -m <minsize = 100>')
+            print('unknow option,usage: evaluate.py -p <pred_file> -g <gt_file> -t <threshold = 0.5>, -z <zoom = None> -a <area = 10> -m <minsize = 100>')
             sys.exit()
-    # construct evaluation metrics
-    dice = DiceCoefficient(normalization = 'none')
+
     # cldice = CLDice(threshold = threshold)
     ari = AdjustedRandIndex(threshold = threshold)
-    mIoU = MeanIoU(threshold = threshold)
     acc = Accuracy(threshold = threshold)
     vio = VariationOfInformation(threshold = threshold)
-    # smd = StreetMoverDistance(threshold = threshold)
-    # betti = LevelSetBettiError(size, maxdim = 1, threshold = threshold, rand_patch_number = 1, area_threshold = 0)    
-    # betti = CubicalBettiError(size, maxdim=1, threshold = threshold, rand_patch_number = 1)
+
     betti = ConnectedComponentError(threshold = threshold, dim=2)
     are = AdaptedRandError(threshold = threshold)
-    eval_criterions_pixel = [mIoU, betti]
+    eval_criterions_pixel = [betti]
     eval_criterions_cluster = [vio, are]
     if os.path.isdir(pred_path):
         pred_paths = sorted(glob.glob(os.path.join(pred_path, '*')))
