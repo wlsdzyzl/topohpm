@@ -1,5 +1,5 @@
 ## Topology-Preserving Hard Pixel Mining for Tubular Structure Segmentation
-This is the official pytorch implementation of Paper "Topology-Preserving Hard Pixel Mining for Tubular Structure Segmentation", BMVC 2023.
+This is the official pytorch implementation of Paper ["Topology-Preserving Hard Pixel Mining for Tubular Structure Segmentation"](https://proceedings.bmvc2023.org/846/), BMVC 2023. [[PDF](https://papers.bmvc2023.org/0846.pdf)] [[Video](https://bmvc2022.mpi-inf.mpg.de/BMVC2023/0846_video.mp4)] [[Supplementary](https://bmvc2022.mpi-inf.mpg.de/BMVC2023/0846_supp.pdf)]
 
 ![](./images/comp.png)
 
