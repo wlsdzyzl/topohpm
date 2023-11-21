@@ -38,6 +38,14 @@ nohup ./predict.sh &
 We compute *Dice coefficient* and *MeanIoU* to evaluate the volumetric accuracy, *Variation of Information (VOI)* and *Adapted Rand Error (ARE)* for clustering-based metrics, *Betti-0* and *Betti-1* error as topology measurements, respectively. Evaluation on 2D image and 3D image can be done through `topohpm/scripts/evaluate.py` and `topohpm/scripts/evaluate3d.py`, respectively.
 ### BibTeX
 ```
+@inproceedings{Zhang_2023_BMVC, 
+author = {Guoqing Zhang and Caixia Dong and Yang Li}, 
+title = {Topology-Preserving Hard Pixel Mining for Tubular Structure Segmentation}, 
+booktitle = {34th British Machine Vision Conference 2023, {BMVC} 2023, Aberdeen, UK, November 20-24, 2023}, 
+publisher = {BMVA}, 
+year = {2023}, 
+url = {https://papers.bmvc2023.org/0846.pdf} 
+} 
 ```
 ### Acknowledgements
 The code structure is mainly inherited from [pytorch-3dunet](https://github.com/wolny/pytorch-3dunet).
