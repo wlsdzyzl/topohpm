@@ -65,10 +65,10 @@ loaders:
   train:
     # path to the training datasets
     file_paths:
-      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold1
-      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold3
-      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold4
-      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold5    
+      - /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold1
+      - /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold3
+      - /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold4
+      - /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold5    
     # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:
       name: FilterSliceBuilder
@@ -121,7 +121,7 @@ loaders:
   val:
     # path to the val datasets
     file_paths:
-      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold2
+      - /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold2
 
     # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:

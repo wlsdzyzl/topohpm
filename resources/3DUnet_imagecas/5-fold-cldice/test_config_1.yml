@@ -43,7 +43,7 @@ loaders:
     # paths to the test datasets; if a given path is a directory all NII files
     # inside this this directory will be included as well (non-recursively)
     file_paths:
-      - /media/wlsdzyzl/DATA/datasets/imageCAS/zoomed_72_128_128/fold1
+      - /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold1
 
     # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:

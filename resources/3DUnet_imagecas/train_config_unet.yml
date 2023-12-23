@@ -105,10 +105,10 @@ loaders:
   train:
     # path to the training datasets
     file_paths:
-      - /media/wlsdzyzl/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold2
-      - /media/wlsdzyzl/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold3
-      - /media/wlsdzyzl/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold4
-      - /media/wlsdzyzl/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold5    # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
+      - /media/wlsdzyzl/DATA2/datasets/ASOCA/nii/cropped_middle_zoomed/fold2
+      - /media/wlsdzyzl/DATA2/datasets/ASOCA/nii/cropped_middle_zoomed/fold3
+      - /media/wlsdzyzl/DATA2/datasets/ASOCA/nii/cropped_middle_zoomed/fold4
+      - /media/wlsdzyzl/DATA2/datasets/ASOCA/nii/cropped_middle_zoomed/fold5    # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:
       name: FilterSliceBuilder
       # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
@@ -160,7 +160,7 @@ loaders:
   val:
     # path to the val datasets
     file_paths:
-      - /media/wlsdzyzl/DATA/datasets/ASOCA/nii/cropped_middle_zoomed/fold1
+      - /media/wlsdzyzl/DATA2/datasets/ASOCA/nii/cropped_middle_zoomed/fold1
 
     # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:

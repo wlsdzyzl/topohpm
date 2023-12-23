@@ -113,10 +113,10 @@ def detect_critical_points(pred, label, complex_layer, dims = [1]):
     print(torch.sum(positive_idx) + torch.sum(negative_idx))
     return positive_idx.cpu().numpy(), negative_idx.cpu().numpy()
 
-tmp = imageio.imread("/media/wlsdzyzl/DATA/datasets/DRIVE/training/images/21_training.tif")
+tmp = imageio.imread("/media/wlsdzyzl/DATA2/datasets/DRIVE/training/images/21_training.tif")
 print(tmp.shape)
 pred_path = "/home/wlsdzyzl/project/topohpm/generated_files/predictions/2d/CREMI/unet/test/prob/1.png"
-label_path = "/media/wlsdzyzl/DATA/datasets/CREMI/dataset_A/test/label/1.png"
+label_path = "/media/wlsdzyzl/DATA2/datasets/CREMI/dataset_A/test/label/1.png"
 pred = np.asarray(imageio.imread(pred_path)).astype(float)
 pred /= 255.0
 label = np.asarray(imageio.imread(label_path)).astype(float)

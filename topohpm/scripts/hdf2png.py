@@ -60,6 +60,6 @@ def f(input_h5py, raw_internal_path, neuronids_internal_path, output_dir):
         
 
 
-f('/media/wlsdzyzl/DATA/datasets/CREMI/sample_A_20160501.hdf', 'volumes/raw', 'volumes/labels/neuron_ids', '/media/wlsdzyzl/DATA/datasets/CREMI/dataset_A_cremi')
-# f('/media/wlsdzyzl/DATA/datasets/CREMI/sample_B_20160501.hdf', 'volumes/raw', 'volumes/labels/neuron_ids', '/media/wlsdzyzl/DATA/datasets/CREMI/dataset_B')
-# f('/media/wlsdzyzl/DATA/datasets/CREMI/sample_C_20160501.hdf', 'volumes/raw', 'volumes/labels/neuron_ids', '/media/wlsdzyzl/DATA/datasets/CREMI/dataset_C')
+f('/media/wlsdzyzl/DATA2/datasets/CREMI/sample_A_20160501.hdf', 'volumes/raw', 'volumes/labels/neuron_ids', '/media/wlsdzyzl/DATA2/datasets/CREMI/dataset_A_cremi')
+# f('/media/wlsdzyzl/DATA2/datasets/CREMI/sample_B_20160501.hdf', 'volumes/raw', 'volumes/labels/neuron_ids', '/media/wlsdzyzl/DATA2/datasets/CREMI/dataset_B')
+# f('/media/wlsdzyzl/DATA2/datasets/CREMI/sample_C_20160501.hdf', 'volumes/raw', 'volumes/labels/neuron_ids', '/media/wlsdzyzl/DATA2/datasets/CREMI/dataset_C')

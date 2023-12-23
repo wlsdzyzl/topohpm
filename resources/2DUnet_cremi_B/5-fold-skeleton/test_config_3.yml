@@ -31,7 +31,7 @@ loaders:
   label_dir: label
   test:
     file_paths:
-      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold3
+      - /media/wlsdzyzl/DATA2/datasets/CREMI/dataset_B/fold3
     # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
     slice_builder:
       # SliceBuilder class

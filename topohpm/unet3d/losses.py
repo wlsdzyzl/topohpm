@@ -4,6 +4,7 @@ from torch import nn as nn
 from torch.autograd import Variable
 from torch.nn import MSELoss, SmoothL1Loss, L1Loss
 from topohpm.unet3d.utils import expand_as_one_hot
+import numpy as np
 # from torchvision.ops import sigmoid_focal_loss
 
 
@@ -202,6 +203,25 @@ class BCEDiceLoss(nn.Module):
     def forward(self, input, target):
         return self.alpha * self.bce(input, target) + self.beta * self.dice(input, target)
 
+class BCEDiceLossWithTLWeight(nn.Module):
+    """Linear combination of BCE and Dice losses"""
+
+    def __init__(self, alpha, beta, tl_weight_path):
+        super(BCEDiceLoss, self).__init__()
+        self.alpha = alpha
+        self.bce = nn.BCEWithLogitsLoss(reduction='none')
+        self.beta = beta
+        self.dice = DiceLoss()
+        self.tl_weight = np.load(tl_weight_path)
+    ## tl_weight 
+    def forward(self, input, target):
+        ## up sample for tl weight
+        n, _, zt, ht, wt = target.size()
+        tl_weight = self.tl_weight[None,None,...]
+        tl_weight = np.repeat(tl_weight, n, axis=0)
+        tl_weight = torch.tensor(tl_weight).to(input.device)
+        tl_weight = F.interpolate(tl_weight, size=(zt, ht, wt), mode="nearest") 
+        return self.alpha * (self.bce(input, target) * tl_weight).mean() + self.beta * self.dice(input, target)
 # dice loss + cl dice loss
 class BCEDCLDiceLoss(nn.Module):
     def __init__(self, alpha, beta, gamma, normalization = 'sigmoid', cl_iter = 10):

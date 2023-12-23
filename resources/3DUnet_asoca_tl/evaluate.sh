@@ -1,0 +1,8 @@
+#!/bin/bash
+python /home/wlsdzyzl/project/topohpm/topohpm/scripts/evaluate3d.py -p /home/wlsdzyzl/project/topohpm/generated_files/predictions/3d_asoca/UNET -g /media/wlsdzyzl/DATA2/datasets/ASOCA/nii/cropped_middle_zoomed_72_128_128/data/label
+python /home/wlsdzyzl/project/topohpm/topohpm/scripts/evaluate3d.py -p /home/wlsdzyzl/project/topohpm/generated_files/predictions/3d_asoca/SKELETON_LOSS_0.6_0.5 -g /media/wlsdzyzl/DATA2/datasets/ASOCA/nii/cropped_middle_zoomed_72_128_128/data/label
+# python /home/wlsdzyzl/project/topohpm/topohpm/scripts/evaluate3d.py -p /home/wlsdzyzl/project/topohpm/generated_files/predictions/3d_imagecas/SKELETON_LOSS_0.6_0.5/fold1 -g /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold1/label
+# python /home/wlsdzyzl/project/topohpm/topohpm/scripts/evaluate3d.py -p /home/wlsdzyzl/project/topohpm/generated_files/predictions/3d_imagecas/SKELETON_LOSS_0.6_0.5/fold2 -g /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold2/label
+# python /home/wlsdzyzl/project/topohpm/topohpm/scripts/evaluate3d.py -p /home/wlsdzyzl/project/topohpm/generated_files/predictions/3d_imagecas/SKELETON_LOSS_0.6_0.5/fold3 -g /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold3/label
+# python /home/wlsdzyzl/project/topohpm/topohpm/scripts/evaluate3d.py -p /home/wlsdzyzl/project/topohpm/generated_files/predictions/3d_imagecas/SKELETON_LOSS_0.6_0.5/fold4 -g /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold4/label
+# python /home/wlsdzyzl/project/topohpm/topohpm/scripts/evaluate3d.py -p /home/wlsdzyzl/project/topohpm/generated_files/predictions/3d_imagecas/SKELETON_LOSS_0.6_0.5/fold5 -g /media/wlsdzyzl/DATA2/datasets/imageCAS/zoomed_72_128_128/fold5/label

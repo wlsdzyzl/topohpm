@@ -55,10 +55,10 @@ loaders:
   label_dir: label
   train:
     file_paths:
-      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold1
-      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold2
-      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold3
-      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold4
+      - /media/wlsdzyzl/DATA2/datasets/CREMI/dataset_B/fold1
+      - /media/wlsdzyzl/DATA2/datasets/CREMI/dataset_B/fold2
+      - /media/wlsdzyzl/DATA2/datasets/CREMI/dataset_B/fold3
+      - /media/wlsdzyzl/DATA2/datasets/CREMI/dataset_B/fold4
     slice_builder:
       name: FilterSliceBuilder
       # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
@@ -108,7 +108,7 @@ loaders:
           expand_dims: true
   val:
     file_paths:
-      - /media/wlsdzyzl/DATA/datasets/CREMI/dataset_B/fold5
+      - /media/wlsdzyzl/DATA2/datasets/CREMI/dataset_B/fold5
     slice_builder:
       name: FilterSliceBuilder
       # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
