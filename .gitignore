@@ -8,3 +8,4 @@ generated_files/
 __pycache__
 *.pyc
 *.ply
+*.npy
