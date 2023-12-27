@@ -1,4 +1,4 @@
-from topohpm.utils import downsample_by_maxpool
+from topohpm.scripts.utils import downsample_by_maxpool
 from .levelsetloss import LevelSetLoss
 from .cubicalloss import CubicalLoss
 from .skeletonloss import SkeletonLoss

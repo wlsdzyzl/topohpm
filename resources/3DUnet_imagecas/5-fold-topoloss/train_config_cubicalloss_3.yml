@@ -28,7 +28,7 @@ trainer:
   pre_trained: /home/wlsdzyzl/project/topohpm/experiments/3d_imagecas/UNET/FOLD3/best_checkpoint.pytorch
   validate_after_iters: 80
   log_after_iters: 40
-  max_num_epochs: 50
+  max_num_epochs: 200
   max_num_iterations: 15000000
   eval_score_higher_is_better: True
   lambda_reg: 0.5

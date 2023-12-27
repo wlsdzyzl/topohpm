@@ -126,9 +126,9 @@ class _AbstractDiceLoss(nn.Module):
     Base class for different implementations of Dice loss.
     """
 
-    def __init__(self, weight=None, normalization='sigmoid'):
+    def __init__(self, normalization='sigmoid'):
         super(_AbstractDiceLoss, self).__init__()
-        self.register_buffer('weight', weight)
+        # self.register_buffer('weight', weight)
         # The output from the network during training is assumed to be un-normalized probabilities and we would
         # like to normalize the logits. Since Dice (or soft Dice in this case) is usually used for binary data,
         # normalizing the channels with Sigmoid is the default choice even for multi-class segmentation problems.
@@ -146,12 +146,12 @@ class _AbstractDiceLoss(nn.Module):
         # actual Dice score computation; to be implemented by the subclass
         raise NotImplementedError
 
-    def forward(self, input, target):
+    def forward(self, input, target, weight = None):
         # get probabilities from logits
         input = self.normalization(input)
 
         # compute per channel Dice coefficient
-        per_channel_dice = self.dice(input, target, weight=self.weight)
+        per_channel_dice = self.dice(input, target, weight=weight)
 
         # average Dice score across all channels/classes
         return 1. - torch.mean(per_channel_dice)
@@ -163,11 +163,11 @@ class DiceLoss(_AbstractDiceLoss):
     The input to the loss function is assumed to be a logit and will be normalized by the Sigmoid function.
     """
 
-    def __init__(self, weight=None, normalization='sigmoid'):
-        super().__init__(weight, normalization)
+    def __init__(self, normalization='sigmoid'):
+        super().__init__(normalization)
 
     def dice(self, input, target, weight):
-        return compute_per_channel_dice(input, target, weight=self.weight)
+        return compute_per_channel_dice(input, target, weight=weight)
 
 class CLDiceLoss(nn.Module):
     def __init__(self, smooth = 1., iter_ = 10, normalization = 'sigmoid'):
@@ -207,7 +207,7 @@ class BCEDiceLossWithTLWeight(nn.Module):
     """Linear combination of BCE and Dice losses"""
 
     def __init__(self, alpha, beta, tl_weight_path):
-        super(BCEDiceLoss, self).__init__()
+        super(BCEDiceLossWithTLWeight, self).__init__()
         self.alpha = alpha
         self.bce = nn.BCEWithLogitsLoss(reduction='none')
         self.beta = beta
@@ -221,7 +221,7 @@ class BCEDiceLossWithTLWeight(nn.Module):
         tl_weight = np.repeat(tl_weight, n, axis=0)
         tl_weight = torch.tensor(tl_weight).to(input.device)
         tl_weight = F.interpolate(tl_weight, size=(zt, ht, wt), mode="nearest") 
-        return self.alpha * (self.bce(input, target) * tl_weight).mean() + self.beta * self.dice(input, target)
+        return self.alpha * (self.bce(input, target) * tl_weight).mean() + self.beta * self.dice(input, target, tl_weight)
 # dice loss + cl dice loss
 class BCEDCLDiceLoss(nn.Module):
     def __init__(self, alpha, beta, gamma, normalization = 'sigmoid', cl_iter = 10):
@@ -458,6 +458,11 @@ def _create_loss(name, loss_config, weight, ignore_index, pos_weight):
         alpha = loss_config.get('alpha', 1.)
         beta = loss_config.get('beta', 1.)
         return BCEDiceLoss(alpha, beta)
+    elif name == "BCEDiceLossWithTLWeight":
+        alpha = loss_config.get('alpha', 1.)
+        beta = loss_config.get('beta', 1.)
+        tl_weight_path = loss_config.get('tl_weight_path')
+        return BCEDiceLossWithTLWeight(alpha=alpha, beta=beta, tl_weight_path=tl_weight_path)
     elif name == "BCEDCLDiceLoss":
         alpha = loss_config.get('alpha', 1.)
         beta = loss_config.get('beta', 0.5)

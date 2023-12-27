@@ -21,7 +21,7 @@ trainer:
   pre_trained: /home/wlsdzyzl/project/topohpm/experiments/2d_cremi_A/UNET/FOLD1/best_checkpoint.pytorch
   validate_after_iters: 5000
   log_after_iters: 1000
-  max_num_epochs: 100
+  max_num_epochs: 200
   max_num_iterations: 100
   eval_score_higher_is_better: True
   lambda_reg: 0.5

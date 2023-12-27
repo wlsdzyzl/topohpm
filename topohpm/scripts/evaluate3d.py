@@ -45,8 +45,6 @@ def f(pred_path, label_path, eval_criterions_pixel, eval_criterions_cluster, zoo
     ## for shape reconstruction from skeletal representation
     # e_label = ndimage.binary_erosion(label)
     # label = e_label.astype(float) +  label.astype(float) - ndimage.binary_dilation(e_label).astype(float)
-    dice_c = 2 * (pred * label).sum() / (pred.sum() + label.sum()) 
-    mIoU_c =  (pred * label).sum() / (pred.sum() + label.sum() - (pred * label).sum())
     res = []
     for eval_c in eval_criterions_pixel:
         tmp = eval_c(pred, label)
@@ -71,7 +69,7 @@ def f(pred_path, label_path, eval_criterions_pixel, eval_criterions_cluster, zoo
             res = res + list(tmp)
         else:
             res.append(tmp)
-    return res + [dice_c, mIoU_c]
+    return res
 
 def main(argv):
     pred_path = ''

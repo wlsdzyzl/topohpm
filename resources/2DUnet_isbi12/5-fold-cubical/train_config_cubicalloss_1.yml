@@ -23,7 +23,7 @@ trainer:
   pre_trained: null
   validate_after_iters: 216
   log_after_iters: 108
-  max_num_epochs: 100
+  max_num_epochs: 200
   max_num_iterations: 15000000
   eval_score_higher_is_better: True
   lambda_reg: 0.5

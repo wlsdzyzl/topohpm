@@ -14,7 +14,7 @@ from collections.abc import Iterable
 import sys, getopt
 import os
 import glob
-from topohpm.utils import zoom
+from topohpm.scripts.utils import zoom
 from skimage.morphology import remove_small_holes, remove_small_objects
 import scipy.ndimage as ndimage
 

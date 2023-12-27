@@ -84,7 +84,7 @@ trainer:
   # how many iterations between tensorboard logging
   log_after_iters: 30
   # max number of epochs
-  max_num_epochs: 500
+  max_num_epochs: 2000
   # max number of iterations
   max_num_iterations: 150000
 

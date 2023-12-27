@@ -4,7 +4,7 @@ import imageio
 import sys, getopt
 import os
 import glob
-from topohpm.utils import zoom, load_itk, save_itk
+from topohpm.scripts.utils import zoom, load_itk, save_itk
 from skimage.morphology import remove_small_holes, remove_small_objects
 
 def f(input_path, output_path, prob_threshold = 0.5, area_threshold = 400, zoom_size = None, dim = 2):
